@@ -1,26 +1,19 @@
 import React from 'react'
+import { nanoid } from 'nanoid'
 import './NewExpense.css'
+import ExpenseForm from './ExpenseForm'
 
-const NewExpense = () => {
-  return <div>NewExpense</div>
+const NewExpense = ({ formSubmitHandler }) => {
+  const saveExpenseDataHandler = enteredExpenseData => {
+    const expenseWithId = { ...enteredExpenseData, id: nanoid(10) }
+    formSubmitHandler(expenseWithId)
+  }
+
+  return (
+    <div className="new-expense">
+      <ExpenseForm saveExpenseDataHandler={saveExpenseDataHandler} />
+    </div>
+  )
 }
 
 export default NewExpense
-
-function f1() {
-  return this
-}
-
-// In a browser:
-f1() === window // true
-// 'strict mode'; // undefined
-
-// In Node:
-f1() === globalThis // true
-// 'strict mode'; // undefined
-function f2() {
-  // see strict mode
-  return this
-}
-
-f2() === undefined // true
