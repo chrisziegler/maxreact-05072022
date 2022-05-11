@@ -21,7 +21,7 @@ const App = () => {
   //     id: 'e4',
   //     title: 'New Desk (Wooden)',
   //     amount: 450,
-  //     date: new Date(2021, 5, 12),
+  //     date: '2021-01-18',
   //   },
   // ]
 
@@ -30,7 +30,7 @@ const App = () => {
   }, [])
 
   const [data, setData] = useState(expenseData)
-  const [isFilter, setIsFilter] = useState({ filter: false })
+  const [hasFilterYear, setHasFilterYear] = useState('')
 
   const submitHandler = newExpenseData => {
     const updatedData = data.concat(newExpenseData)
@@ -38,18 +38,19 @@ const App = () => {
   }
 
   const setFilterYear = year => {
-    setIsFilter({ filter: year })
+    setHasFilterYear(year)
   }
-  // console.log(typeof data[0].date.getFullYear())
 
-  const filteredData = isFilter.filter
-    ? data.filter(item => item.date.getFullYear().toString() === isFilter.filter)
-    : data
+  const getSelectedYears = expense => {
+    return expense.date.slice(0, 4) === hasFilterYear
+  }
+  const filteredYears = data.filter(getSelectedYears)
+  const filteredData = hasFilterYear ? filteredYears : data
 
   return (
     <div>
       <NewExpense formSubmitHandler={submitHandler} />
-      <Expenses items={data} setFilterYear={setFilterYear} />
+      <Expenses items={filteredData} setFilterYear={setFilterYear} />
     </div>
   )
 }

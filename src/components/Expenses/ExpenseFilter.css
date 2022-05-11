@@ -1,6 +1,6 @@
 .expenses-filter {
   display: flex;
-  background: #d5bce0;
+  background: #F5F1DA;
   color: white;
   padding: 0 1rem;
   margin: 2rem auto;
@@ -24,8 +24,10 @@
 
 .expenses-filter label {
   font-weight: bold;
-  color: black;
+  font-size: 1.1rem;
+  color: #000;
   margin-bottom: 0.5rem;
+  margin-left: 0.8rem;
 }
 
 .expenses-filter select {
