@@ -8,14 +8,9 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
     date: '',
   })
 
-  const newExpenseData = e => {
+  const newExpenseHandler = e => {
     e.preventDefault()
-    // const expenseWithId = { ...newExpense, id: nanoid(10) }
-    setNewExpense({
-      title: '',
-      amount: '',
-      date: '',
-    })
+    setNewExpense({ title: '', amount: '', date: '' })
     saveExpenseDataHandler(newExpense)
   }
 
@@ -32,7 +27,7 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
   }
 
   return (
-    <form onSubmit={newExpenseData}>
+    <form onSubmit={newExpenseHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label htmlFor="form-title">Title</label>
@@ -60,8 +55,8 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
           <label htmlFor="form-date">Date</label>
           <input
             type="date"
-            min="2022-01-01"
-            max="2024"
+            min="2020-01-01"
+            max="2025"
             name="date"
             id="form-date"
             value={newExpense.date}

@@ -30,16 +30,26 @@ const App = () => {
   }, [])
 
   const [data, setData] = useState(expenseData)
+  const [isFilter, setIsFilter] = useState({ filter: false })
 
   const submitHandler = newExpenseData => {
     const updatedData = data.concat(newExpenseData)
     setData(updatedData)
   }
 
+  const setFilterYear = year => {
+    setIsFilter({ filter: year })
+  }
+  // console.log(typeof data[0].date.getFullYear())
+
+  const filteredData = isFilter.filter
+    ? data.filter(item => item.date.getFullYear().toString() === isFilter.filter)
+    : data
+
   return (
     <div>
       <NewExpense formSubmitHandler={submitHandler} />
-      <Expenses items={data} />
+      <Expenses items={data} setFilterYear={setFilterYear} />
     </div>
   )
 }
