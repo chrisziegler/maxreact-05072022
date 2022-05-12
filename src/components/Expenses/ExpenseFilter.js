@@ -1,15 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import './ExpenseFilter.css'
 
-const ExpensesFilter = ({ onSetYear }) => {
-  const [year, setYear] = useState('')
-
+const ExpensesFilter = ({ onChangeFilter, year }) => {
   const handleChange = e => {
-    setYear(prevState => {
-      return e.target.value
-    })
-    onSetYear(e.target.value)
+    onChangeFilter(e.target.value)
   }
   return (
     <div className="expenses-filter">
