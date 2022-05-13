@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Expenses from './components/Expenses/Expenses'
 import NewExpense from './components/NewExpense/NewExpense'
 import { expenseData } from './expense_data'
 const App = () => {
-  useEffect(() => {
-    setData(expenseData)
-  }, [])
+  // no need to prevent http request - temp just using fs
+  // useEffect(() => {
+  //   setExpenses(expenseData)
+  // }, [])
 
-  const [data, setData] = useState(expenseData)
+  const [expenses, setExpenses] = useState(expenseData)
 
-  const submitHandler = newExpenseData => {
-    const updatedData = data.concat(newExpenseData)
-    setData(updatedData)
+  const addExpense = expense => {
+    setExpenses(prevExpense => [expense, ...prevExpense])
   }
 
   return (
     <div>
-      <NewExpense formSubmitHandler={submitHandler} />
-      <Expenses items={data} />
+      <NewExpense formSubmitHandler={addExpense} />
+      <Expenses items={expenses} />
     </div>
   )
 }

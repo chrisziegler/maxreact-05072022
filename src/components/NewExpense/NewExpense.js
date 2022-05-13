@@ -5,7 +5,11 @@ import ExpenseForm from './ExpenseForm'
 
 const NewExpense = ({ formSubmitHandler }) => {
   const saveExpenseDataHandler = enteredExpenseData => {
-    const expenseWithId = { ...enteredExpenseData, id: nanoid(10) }
+    const expenseWithId = {
+      ...enteredExpenseData,
+      date: new Date(enteredExpenseData.date).toISOString(),
+      id: nanoid(10),
+    }
     formSubmitHandler(expenseWithId)
   }
 

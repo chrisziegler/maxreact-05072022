@@ -6,32 +6,42 @@ import ExpenseFilter from './ExpenseFilter'
 import './Expenses.css'
 
 const Expenses = ({ items }) => {
-  const [filterYear, setFilterYear] = useState('')
+  const [year, setYear] = useState('2022')
 
   const filterChangeHandler = selectedYear => {
-    setFilterYear(selectedYear)
+    setYear(selectedYear)
   }
 
-  const getSelectedYears = items => {
-    // return items.date.slice(0, 4) === filterYear
-    const date = new Date(items.date)
-    return date.getFullYear().toString() === filterYear
+  const getSelectedYear = item => {
+    const date = new Date(item.date)
+    return date.getFullYear().toString() === year
   }
-  const filteredYears = items.filter(getSelectedYears)
-  const filteredData = filterYear ? filteredYears : items
+  const filteredYear = items.filter(getSelectedYear)
+  // gives us 'All Years' select option when year is undefined
+  const filteredData = year ? filteredYear : items
+
+  const noContent = {
+    color: 'khaki',
+    padding: '2rem',
+    fontSize: '1.2rem',
+  }
 
   return (
     <div>
       <Card className="expenses">
-        <ExpenseFilter onChangeFilter={filterChangeHandler} year={filterYear} />
-        {filteredData.map(item => (
-          <ExpenseItem
-            key={item.id}
-            title={item.title}
-            amount={item.amount}
-            date={item.date}
-          />
-        ))}
+        <ExpenseFilter onChangeFilter={filterChangeHandler} year={year} />
+        {filteredData.length === 0 ? (
+          <div style={noContent}>There are no expenses added for this year.</div>
+        ) : (
+          filteredData.map(item => (
+            <ExpenseItem
+              key={item.id}
+              title={item.title}
+              amount={item.amount}
+              date={item.date}
+            />
+          ))
+        )}
       </Card>
     </div>
   )

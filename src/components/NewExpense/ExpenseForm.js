@@ -16,15 +16,7 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
 
   const handleChange = event => {
     let { value } = event.target
-    // dynamic keys [computed properties]
-    // properly setState passing-in previous state
     setNewExpense(prevState => {
-      // if (event.target.name === 'date') {
-      //   return {
-      //     ...prevState,
-      //     date: new Date(event.target.value),
-      //   }
-      // }
       return {
         ...prevState,
         [event.target.name]: value,
