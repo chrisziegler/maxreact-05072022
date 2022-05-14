@@ -26,22 +26,25 @@ const Expenses = ({ items }) => {
     fontSize: '1.2rem',
   }
 
+  let expensesContent = (
+    <div style={noContent}>There are no expenses added for this year.</div>
+  )
+  if (filteredData.length > 0) {
+    expensesContent = filteredData.map(item => (
+      <ExpenseItem
+        key={item.id}
+        title={item.title}
+        amount={item.amount}
+        date={item.date}
+      />
+    ))
+  }
+
   return (
     <div>
       <Card className="expenses">
         <ExpenseFilter onChangeFilter={filterChangeHandler} year={year} />
-        {filteredData.length === 0 ? (
-          <div style={noContent}>There are no expenses added for this year.</div>
-        ) : (
-          filteredData.map(item => (
-            <ExpenseItem
-              key={item.id}
-              title={item.title}
-              amount={item.amount}
-              date={item.date}
-            />
-          ))
-        )}
+        {expensesContent}
       </Card>
     </div>
   )
