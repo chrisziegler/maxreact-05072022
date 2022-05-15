@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './ExpenseForm.css'
 
-const ExpenseForm = ({ saveExpenseDataHandler }) => {
+const ExpenseForm = ({ saveExpenseDataHandler, setIsEditing }) => {
   const [newExpense, setNewExpense] = useState({
     title: '',
     amount: '',
@@ -12,6 +12,7 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
     e.preventDefault()
     setNewExpense({ title: '', amount: '', date: '' })
     saveExpenseDataHandler(newExpense)
+    setIsEditing(false)
   }
 
   const handleChange = event => {
@@ -22,6 +23,10 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
         [event.target.name]: value,
       }
     })
+  }
+
+  const handleCancel = () => {
+    setIsEditing(false)
   }
 
   return (
@@ -62,8 +67,15 @@ const ExpenseForm = ({ saveExpenseDataHandler }) => {
           />
         </div>
       </div>
-      <div className="new-expense__actions">
-        <button>Add Expense</button>
+      <div className="new-expenses__wrapper">
+        <div className="new-expense__actions">
+          <button type="button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
+        <div className="new-expense__actions">
+          <button>Add Expense</button>
+        </div>
       </div>
     </form>
   )

@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div>
       <NewExpense formSubmitHandler={addExpense} />
-      <Expenses items={expenses} />
+      <Expenses allYears={expenses} />
     </div>
   )
 }

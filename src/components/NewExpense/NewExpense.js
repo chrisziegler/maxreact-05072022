@@ -4,6 +4,8 @@ import './NewExpense.css'
 import ExpenseForm from './ExpenseForm'
 
 const NewExpense = ({ formSubmitHandler }) => {
+  const [isEditing, setIsEditing] = React.useState(false)
+
   const saveExpenseDataHandler = enteredExpenseData => {
     const expenseWithId = {
       ...enteredExpenseData,
@@ -15,7 +17,15 @@ const NewExpense = ({ formSubmitHandler }) => {
 
   return (
     <div className="new-expense">
-      <ExpenseForm saveExpenseDataHandler={saveExpenseDataHandler} />
+      {!isEditing && (
+        <button onClick={() => setIsEditing(true)}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          saveExpenseDataHandler={saveExpenseDataHandler}
+          setIsEditing={setIsEditing}
+        />
+      )}
     </div>
   )
 }

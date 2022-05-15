@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import ExpenseItem from './ExpenseItem'
 import Card from '../UI/Card'
 import ExpenseFilter from './ExpenseFilter'
+import ExpensesList from './ExpensesList'
 import './Expenses.css'
 
-const Expenses = ({ items }) => {
+const Expenses = ({ allYears }) => {
   const [year, setYear] = useState('2022')
 
   const filterChangeHandler = selectedYear => {
@@ -16,35 +16,14 @@ const Expenses = ({ items }) => {
     const date = new Date(item.date)
     return date.getFullYear().toString() === year
   }
-  const filteredYear = items.filter(getSelectedYear)
-  // gives us 'All Years' select option when year is undefined
-  const filteredData = year ? filteredYear : items
-
-  const noContent = {
-    color: 'khaki',
-    padding: '2rem',
-    fontSize: '1.2rem',
-  }
-
-  let expensesContent = (
-    <div style={noContent}>There are no expenses added for this year.</div>
-  )
-  if (filteredData.length > 0) {
-    expensesContent = filteredData.map(item => (
-      <ExpenseItem
-        key={item.id}
-        title={item.title}
-        amount={item.amount}
-        date={item.date}
-      />
-    ))
-  }
+  const filteredYear = allYears.filter(getSelectedYear)
+  const filteredData = year ? filteredYear : allYears
 
   return (
     <div>
       <Card className="expenses">
         <ExpenseFilter onChangeFilter={filterChangeHandler} year={year} />
-        {expensesContent}
+        <ExpensesList filteredData={filteredData} />
       </Card>
     </div>
   )
