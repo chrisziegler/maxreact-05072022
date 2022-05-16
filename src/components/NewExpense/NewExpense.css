@@ -1,6 +1,6 @@
 .new-expense {
   /* background-color: #a892ee; */
-  background-color: rgb(170, 164, 210);
+  background-color: #d6dbff;
   padding: 1rem 1rem 0.65rem 1rem;
   margin: 2rem auto;
   margin-bottom: 0;
@@ -27,7 +27,7 @@
   /* border: 1px solid #40005d;
   background-color: #40005d; */
   border: 1px solid white;
-  background-color: slateblue;
+  background-color: #303c88;
   color: white;
   border-radius: 12px;
   /* margin-right: 1rem; */
@@ -37,7 +37,7 @@
 .new-expense button:active {
   /* background-color: #510674;
   border-color: #510674; */
-  background-color: rgb(81, 65, 182);
+  background-color: #3c4aaa;
   border-color: white;
 }
 

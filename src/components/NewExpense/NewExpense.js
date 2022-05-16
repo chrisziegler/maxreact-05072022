@@ -9,7 +9,6 @@ const NewExpense = ({ formSubmitHandler }) => {
   const saveExpenseDataHandler = enteredExpenseData => {
     const expenseWithId = {
       ...enteredExpenseData,
-      date: new Date(enteredExpenseData.date).toISOString(),
       id: nanoid(10),
     }
     formSubmitHandler(expenseWithId)
@@ -18,7 +17,9 @@ const NewExpense = ({ formSubmitHandler }) => {
   return (
     <div className="new-expense">
       {!isEditing && (
-        <button onClick={() => setIsEditing(true)}>Add New Expense</button>
+        <button onClick={() => setIsEditing(true)}>
+          Add New Expense
+        </button>
       )}
       {isEditing && (
         <ExpenseForm

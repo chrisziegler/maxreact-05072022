@@ -10,8 +10,12 @@ const ExpenseForm = ({ saveExpenseDataHandler, setIsEditing }) => {
 
   const newExpenseHandler = e => {
     e.preventDefault()
+    saveExpenseDataHandler({
+      title: newExpense.title,
+      amount: +newExpense.amount,
+      date: new Date(newExpense.date),
+    })
     setNewExpense({ title: '', amount: '', date: '' })
-    saveExpenseDataHandler(newExpense)
     setIsEditing(false)
   }
 
